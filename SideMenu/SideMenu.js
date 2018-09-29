@@ -5,7 +5,18 @@ import { NavigationActions } from 'react-navigation';
 import { Container, Header, Content, ListItem, Icon, Body } from 'native-base';
 
 const menu = [
-  'Home', 'Videos', 'En Vivo'
+  'Home' = {
+    icon: 'home',
+    text: 'Home'
+  }, 
+  'Videos' = {
+    icon: 'video',
+    text: 'Videos'
+  }, 
+  'EnVivo' = {
+    icon: 'video',
+    text: 'En Vivo'
+  }
 ];
 
 class SideMenu extends Component {
@@ -31,6 +42,7 @@ class SideMenu extends Component {
                 key={item} 
                 onPress={() => this.props.navigation.navigate(item)}
                 noBorder >
+                <Icon name="video" />
                 <Text>{item}</Text>
               </ListItem>
             )}
