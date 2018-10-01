@@ -3,6 +3,7 @@ import { TouchableOpacity, StyleSheet } from 'react-native';
 import { createStackNavigator } from  'react-navigation';
 import IOSIcon from "react-native-vector-icons/Ionicons";
 import HomeScreen from "./Home";
+import DetailItem from './DetailItem';
 
 const stackNav = createStackNavigator(
   {
@@ -19,6 +20,7 @@ const stackNav = createStackNavigator(
         ),
       })
     },
+    DetailItem: DetailItem,
   },
   {
     initialRouteName: 'Home',
