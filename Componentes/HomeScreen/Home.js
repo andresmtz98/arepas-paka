@@ -6,7 +6,7 @@ import {
   Button
 } from 'react-native';
 
-class MainScreen extends Component {
+class HomeScreen extends Component {
   render () {
     return (
       <View style={styles.container}>
@@ -25,4 +25,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MainScreen;
+export default HomeScreen;

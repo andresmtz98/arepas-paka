@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, View, StyleSheet, FlatList } from 'react-native';
+import { Text, StyleSheet, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import { NavigationActions } from 'react-navigation';
 import { Container, Header, Content, ListItem, Icon, Body } from 'native-base';
 
+
 const menu = [
-  'Home' = {
+  {
     icon: 'home',
-    text: 'Home'
+    text: 'Home',
+    route: 'Home',
   }, 
-  'Videos' = {
-    icon: 'video',
-    text: 'Videos'
+  {
+    icon: 'video-library',
+    text: 'Videos',
+    route: 'Videos',
   }, 
-  'EnVivo' = {
-    icon: 'video',
-    text: 'En Vivo'
+  {
+    icon: 'ondemand-video',
+    text: 'En Vivo',
+    route: 'Live',
   }
 ];
 
@@ -31,19 +35,25 @@ class SideMenu extends Component {
   render() {
     return (
       <Container>
-        <Header style={{backgroundColor: '#3a455c', height: 150 }}></Header>
+        <Header style={styles.header}>
+          
+        </Header>
         <Content>
           <FlatList 
-            style={{ borderTopWidth: 0.4, borderTopColor: '#f0f0f0'}}
+            style={styles.flatList}
             data={menu}
             renderItem={ ({ item }) => (
               <ListItem 
                 button 
-                key={item} 
-                onPress={() => this.props.navigation.navigate(item)}
+                key={item.text} 
+                onPress={() => this.props.navigation.navigate(item.route)}
                 noBorder >
-                <Icon name="video" />
-                <Text>{item}</Text>
+                <Icon 
+                  name={item.icon} 
+                  type="MaterialIcons" 
+                  style={styles.icon}
+                />
+                <Text>{item.text}</Text>
               </ListItem>
             )}
           />
@@ -56,22 +66,19 @@ class SideMenu extends Component {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 20,
-    flex: 1
+    flex: 1,
   },
-  navItemStyle: {
-    padding: 10
+  header: {
+    backgroundColor: '#3a455c',
+    height: 180,
   },
-  navSectionStyle: {
-    backgroundColor: 'lightgrey'
+  flatList: {
+    borderTopWidth: 0.4,
+    borderTopColor: '#f0f0f0',
   },
-  sectionHeadingStyle: {
-    paddingVertical: 10,
-    paddingHorizontal: 5
+  icon: {
+    marginRight: 20,
   },
-  footerContainer: {
-    padding: 20,
-    backgroundColor: 'lightgrey'
-  }
 });
 
 SideMenu.propTypes = {

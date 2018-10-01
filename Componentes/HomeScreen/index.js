@@ -2,13 +2,12 @@ import React from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import { createStackNavigator } from  'react-navigation';
 import IOSIcon from "react-native-vector-icons/Ionicons";
-import MainScreen from "./MainScreen";
-import DetailScreen from "./DetailScreen";
+import HomeScreen from "./Home";
 
 const stackNav = createStackNavigator(
   {
-    Main: {
-      screen: MainScreen,
+    Home: {
+      screen: HomeScreen,
       navigationOptions: ({navigation}) => ({
         title: 'Home',
         headerLeft: (
@@ -20,15 +19,9 @@ const stackNav = createStackNavigator(
         ),
       })
     },
-    Detail: {
-      screen: DetailScreen,
-      navigationOptions: {
-        title: 'Detail',
-      }
-    },
   },
   {
-    initialRouteName: 'Main',
+    initialRouteName: 'Home',
   }
 );
 
