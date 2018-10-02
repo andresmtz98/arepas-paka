@@ -53,7 +53,7 @@ class SideMenu extends Component {
                   type="MaterialIcons" 
                   style={styles.icon}
                 />
-                <Text>{item.text}</Text>
+                <Text style={styles.itemMenu}>{item.text}</Text>
               </ListItem>
             )}
           />
@@ -79,6 +79,9 @@ const styles = StyleSheet.create({
   icon: {
     marginRight: 20,
   },
+  itemMenu: {
+    fontFamily: 'Roboto',
+  }
 });
 
 SideMenu.propTypes = {

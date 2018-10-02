@@ -1,36 +1,20 @@
-import React from 'react';
-import { TouchableOpacity, StyleSheet } from 'react-native';
 import { createStackNavigator } from  'react-navigation';
-import IOSIcon from "react-native-vector-icons/Ionicons";
 import HomeScreen from "./Home";
 import DetailItem from './DetailItem';
+import Pedido from './Pedido';
 
 const stackNav = createStackNavigator(
   {
-    Home: {
-      screen: HomeScreen,
-      navigationOptions: ({navigation}) => ({
-        title: 'Home',
-        headerLeft: (
-          <TouchableOpacity
-            style={styles.touchableOpacity} 
-            onPress={() => navigation.toggleDrawer()} >
-            <IOSIcon name="ios-menu" size={30} />
-          </TouchableOpacity>
-        ),
-      })
-    },
+    Home: HomeScreen,
     DetailItem: DetailItem,
+    Pedido: Pedido,
   },
   {
     initialRouteName: 'Home',
+    navigationOptions: {
+      header: null,
+    }
   }
 );
-
-const styles = StyleSheet.create({
-  touchableOpacity: {
-    marginLeft: 10,
-  }
-});
 
 export default stackNav;

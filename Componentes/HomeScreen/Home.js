@@ -1,19 +1,18 @@
 import React, {Component} from 'react';
 import { StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { Container, Header, Grid, Row, Col, Content, Card, CardItem, Left, Body, Button, Icon, Text, Right } from 'native-base';
+import { Container, Header, Grid, Row, Col, Content, Left, Body, Button, Icon, Title, Right } from 'native-base';
 import ModalItem from './ModalItem';
+import { ITEMS } from './../../Datos/Data';
 
-const imagesUri = [
-  "https://www.abc.es/media/sociedad/2016/08/10/hamburguesa-comida-rapida-k49--620x349@abc.jpg",
-  "https://static.iris.net.co/dinero/upload/images/2016/12/15/240182_1.jpg",
-];
 
 class HomeScreen extends Component {
   state = {
     isModalVisible: false,
     currentItem: {
-      city: 'Barranquilla',
-      price: '12000',
+      nombre: '',
+      descripcion: '',
+      ciudad: '',
+      precio: '',
       uri: null,
     },
   };
@@ -24,66 +23,88 @@ class HomeScreen extends Component {
 
   render () {
     return (
-      <Container>
-          <Content style={styles.content}>
-            <Grid>
-              <Row style={styles.row}>
-                <Col style={styles.col}>
-                  <Content>
-                    <TouchableOpacity
-                      onPress={() => this.props.navigation.navigate("DetailItem")}
-                      onLongPress={() => { 
-                        this.setState({ 
-                          isModalVisible: true,
-                          currentItem: {
-                            city: 'Soledad',
-                            price: '12000',
-                            uri: imagesUri[0]
-                          }
-                        }) 
-                      }}                      
-                    >
-                      <Image                         
-                        source={{ uri: imagesUri[0]}} 
-                        style={styles.image} />
-                    </TouchableOpacity>
-                  </Content>
-                </Col>
-                <Col style={styles.col}>
-                  <Content>
-                    <TouchableOpacity
-                      onLongPress={() => { 
-                        this.setState({ 
-                          isModalVisible: true,
-                          currentItem: {
-                            city: 'Barranquilla',
-                            price: '7500',
-                            uri: imagesUri[1]
-                          }
-                        }) 
-                      }} 
-                    >
-                      <Image 
-                        source={{ uri: imagesUri[1]}}
-                        style={styles.image} />
-                    </TouchableOpacity>
-                  </Content>
-                </Col>
-              </Row>              
-            </Grid>
-            <ModalItem 
-              hideModal={this._hideModal} 
-              visible={this.state.isModalVisible} 
-              currentItem={this.state.currentItem} 
-              navigation={this.props.navigation}
-            />
-          </Content>
+      <Container style={styles.container}>
+        <Header transparent>
+          <Left>
+            <Button transparent
+              onPress={() => this.props.navigation.toggleDrawer()}>
+              <Icon 
+                style={{color: "#404040"}}
+                name="ios-menu" 
+                type="Ionicons"               
+              />
+            </Button>          
+          </Left>
+          <Body>
+            <Title style={{color: "#404040"}}>Home</Title>
+          </Body>
+          <Right />
+        </Header>
+        <Content style={styles.content}>
+          <Grid>
+            <Row style={styles.row}>
+              <Col style={styles.col}>
+                <Content>
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.setState({                         
+                        currentItem: ITEMS[0]
+                      })
+                      this.props.navigation.navigate("DetailItem", { currentItem: this.state.currentItem })
+                    }}
+                    onLongPress={() => { 
+                      this.setState({ 
+                        isModalVisible: true,
+                        currentItem: ITEMS[0]
+                      }) 
+                    }}                      
+                  >
+                    <Image                         
+                      source={{ uri: ITEMS[0].uri}} 
+                      style={styles.image} />
+                  </TouchableOpacity>
+                </Content>
+              </Col>
+              <Col style={styles.col}>
+                <Content>
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.setState({ 
+                        currentItem: ITEMS[1]
+                      })
+                      this.props.navigation.navigate("DetailItem", { currentItem: this.state.currentItem })
+                    }}
+                    onLongPress={() => { 
+                      this.setState({ 
+                        isModalVisible: true,
+                        currentItem: ITEMS[1]
+                      }) 
+                    }} 
+                  >
+                    <Image 
+                      source={{ uri: ITEMS[1].uri}}
+                      style={styles.image} />
+                  </TouchableOpacity>
+                </Content>
+              </Col>
+            </Row>             
+          </Grid>
+          <ModalItem 
+            hideModal={this._hideModal} 
+            visible={this.state.isModalVisible} 
+            currentItem={this.state.currentItem} 
+            navigation={this.props.navigation}
+          />
+        </Content>
       </Container>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#FFE8A1",
+  },
   content: {
       paddingHorizontal: 4,
       paddingVertical: 3,
@@ -92,7 +113,6 @@ const styles = StyleSheet.create({
     height: 300, 
     width: null, 
     flex: 1, 
-    resizeMode: 'stretch',
   },
   row: {
     height: 300,
