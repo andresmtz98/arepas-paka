@@ -2,26 +2,28 @@ import React, { Component } from 'react';
 import { StyleSheet, Image } from 'react-native';
 import { Container, Content, Card, CardItem, Text, Left, Body, Right, Icon, Button, Header, Title } from 'native-base';
 
+import { CommonStyles } from './../Styles';
+
 class DetailItem extends Component {
 
   render() {
     const { navigation } = this.props;
     const { nombre, precio, descripcion, uri } = navigation.getParam('currentItem', {});
     return (
-      <Container style={styles.container}>
+      <Container style={CommonStyles.baseColor}>
         <Header transparent>
           <Left>
             <Button transparent
               onPress={() => navigation.goBack()}>
               <Icon 
-                style={{color: "#404040"}}
+                style={CommonStyles.baseColor_Font}
                 name="ios-arrow-back" 
                 type="Ionicons"               
               />
             </Button>          
           </Left>
           <Body>
-            <Title style={{color: "#404040"}}>Detalle</Title>
+            <Title style={CommonStyles.baseColor_Font}>Detalle</Title>
           </Body>
           <Right />
         </Header>
@@ -30,7 +32,7 @@ class DetailItem extends Component {
             <CardItem bordered>
               <Left>
                 <Body>
-                  <Text style={{color: "#404040"}}>{nombre}</Text>
+                  <Text style={CommonStyles.baseColor_Font}>{nombre}</Text>
                   <Text note>{`$ ${precio}`}</Text>
                 </Body>
               </Left>
@@ -50,8 +52,8 @@ class DetailItem extends Component {
                   transparent 
                   iconRight
                   onPress={() => navigation.navigate("Pedido")}>                  
-                  <Text style={{color: "#404040",}}>Pedir</Text>
-                  <Icon style={{color: "#404040",}} name="add-to-list" type="Entypo" />
+                  <Text style={CommonStyles.baseColor_Font}>Pedir</Text>
+                  <Icon style={CommonStyles.baseColor_Font} name="add-to-list" type="Entypo" />
                 </Button>
               </Left>
               <Body />
@@ -65,9 +67,6 @@ class DetailItem extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#FFE8A1",    
-  },
   cardImage: {
     flex: 0,
     height: 300,

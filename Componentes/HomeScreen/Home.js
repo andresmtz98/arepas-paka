@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import { StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Container, Header, Grid, Row, Col, Content, Left, Body, Button, Icon, Title, Right } from 'native-base';
 import ModalItem from './ModalItem';
-import { ITEMS } from './../../Datos/Data';
+import { ITEMS } from './../../Servicios/Datos/Data';
+
+import { CommonStyles, StyleConstants } from './../Styles';
 
 
 class HomeScreen extends Component {
@@ -23,20 +25,20 @@ class HomeScreen extends Component {
 
   render () {
     return (
-      <Container style={styles.container}>
+      <Container style={CommonStyles.baseColor}>
         <Header transparent>
           <Left>
             <Button transparent
               onPress={() => this.props.navigation.toggleDrawer()}>
               <Icon 
-                style={{color: "#404040"}}
+                style={CommonStyles.baseColor_Font}
                 name="ios-menu" 
                 type="Ionicons"               
               />
             </Button>          
           </Left>
           <Body>
-            <Title style={{color: "#404040"}}>Home</Title>
+            <Title style={CommonStyles.baseColor_Font}>Home</Title>
           </Body>
           <Right />
         </Header>
@@ -102,12 +104,11 @@ class HomeScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#FFE8A1",
-  },
   content: {
       paddingHorizontal: 4,
       paddingVertical: 3,
+      borderTopColor: StyleConstants.BASE_COLOR_FONT_HEX,
+      borderTopWidth: 1,
   },
   image: {
     height: 300, 

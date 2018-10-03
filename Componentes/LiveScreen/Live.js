@@ -31,6 +31,9 @@ class LiveScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#FFE8A1",
+  },
   touchableOpacity: {
     marginLeft: 10,
   }
