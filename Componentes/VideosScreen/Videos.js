@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, WebView } from 'react-native';
 import { Container, Header, Content, Left, Body, Title, Right, Button, Icon } from 'native-base';
-import Video from 'react-native-video';
 
 import { CommonStyles, StyleConstants } from '../Styles';
 
@@ -9,24 +8,14 @@ class VideosScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      videoPlayer: {
-        repeat: false, 
-        rate: 1, 
-        volume: 1, 
-        muted: false, 
-        resizeMode: 'contain', // video's mode: none, cover, stretch, contain 
-        duration: 0.0, // video's duration set on event onLoad 
-        currentTime: 0.0, // set on event onProgress 
-        paused: true, // check if video is pausing or not 
-        rateText: '1.0', // rate value in component Picker 
-        pausedText: 'Play', // view to user: 'Play' - when video is pausing, 'Pause' - when video is playing 
-        hideControls: false, // hide control button when video is playing and show it when user clicks on video
-      },
+      
     };
   }
 
   onLoad = data => {
-    this.setState({ videoPlayer: { duration: data.duration }});
+    console.log(data);
+    
+    this.setState({ videoPlayer: { duration: data.durationMillis }});
   }
 
   onPress = data => {
@@ -58,24 +47,19 @@ class VideosScreen extends Component {
           </Body>
           <Right />
         </Header>
-        <Content style={styles.content}>
-          <TouchableWithoutFeedback 
-          onPress={() => this.setState({ paused: !this.state.paused })}>
-            <Video
-              style={styles.videoPlayer} 
-              ref={( ref: Video) => { this.video = ref }}
-              source={require('./../../Servicios/Videos/video.mp4')}
-              repeat={this.state.videoPlayer.repeat}
-              rate={this.state.videoPlayer.rate}
-              volume={this.state.videoPlayer.volume}
-              muted={this.state.videoPlayer.muted}
-              resizeMode={this.state.videoPlayer.resizeMode}
-              paused={this.state.videoPlayer.paused}
-              onLoad={this.onLoad}
-              onProgress={this.onProgress}
-              onEnd={this.onEnd}
-            />
-          </TouchableWithoutFeedback>
+        <Content padder style={styles.content}>
+          <WebView 
+            source={{ uri: 'https://www.youtube.com/embed/f-e8A2omL9s' }}
+            style={styles.videoPlayer}
+          />
+          <WebView 
+            source={{ uri: 'https://www.youtube.com/embed/oS0eXcU0j54' }}
+            style={styles.videoPlayer}
+          />
+          <WebView 
+            source={{ uri: 'http://www.ustream.tv/embed/23606670?html5ui&autoplay=true' }}
+            style={styles.videoPlayer}
+          />
         </Content>
       </Container>
     );
@@ -88,11 +72,10 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
   },
   videoPlayer: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
+    marginHorizontal: 5,
+    marginBottom: 20,
+    width: '97%',
+    height: 350,
   },
 });
 
