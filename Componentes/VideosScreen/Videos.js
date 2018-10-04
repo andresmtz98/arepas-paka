@@ -12,21 +12,6 @@ class VideosScreen extends Component {
     };
   }
 
-  onLoad = data => {
-    console.log(data);
-    
-    this.setState({ videoPlayer: { duration: data.durationMillis }});
-  }
-
-  onPress = data => {
-    this.setState({ videoPlayer: { currentTime: data.currentTime }})
-  }
-
-  onEnd = data => {
-    this.setState({ videoPlayer: { pausedText: 'Reproducir', paused: true }});
-    this.video.seek(0);
-  }
-
   render() {
     return (
       <Container style={CommonStyles.baseColor}>
@@ -48,16 +33,15 @@ class VideosScreen extends Component {
           <Right />
         </Header>
         <Content padder style={styles.content}>
+          <Body style={styles.body}>
+            <Title style={CommonStyles.baseColor_Font}>Videos de Recetas</Title>
+          </Body>
           <WebView 
             source={{ uri: 'https://www.youtube.com/embed/f-e8A2omL9s' }}
-            style={styles.videoPlayer}
+            style={styles.videoPlayer}            
           />
           <WebView 
             source={{ uri: 'https://www.youtube.com/embed/oS0eXcU0j54' }}
-            style={styles.videoPlayer}
-          />
-          <WebView 
-            source={{ uri: 'http://www.ustream.tv/embed/23606670?html5ui&autoplay=true' }}
             style={styles.videoPlayer}
           />
         </Content>
@@ -73,9 +57,13 @@ const styles = StyleSheet.create({
   },
   videoPlayer: {
     marginHorizontal: 5,
-    marginBottom: 20,
+    marginTop: 20,
     width: '97%',
     height: 350,
+  },
+  body: {
+    width: '100%',
+    alignItems: 'center',
   },
 });
 

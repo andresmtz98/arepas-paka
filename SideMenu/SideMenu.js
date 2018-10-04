@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, FlatList } from 'react-native';
+import { Text, StyleSheet, FlatList, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import { NavigationActions } from 'react-navigation';
 import { Container, Header, Content, ListItem, Icon, Body } from 'native-base';
@@ -32,11 +32,25 @@ class SideMenu extends Component {
     this.props.navigation.dispatch(navigateToAction);
   }
 
+  makeid = () => {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  
+    for (var i = 0; i < 5; i++)
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+  
+    return text;
+  }
+
   render() {
     return (
       <Container>
         <Header style={styles.header}>
-          
+          <Image 
+            source={require('./../assets/images/LOGO.png')}
+            style={styles.logo}
+            resizeMode='stretch'
+          />
         </Header>
         <Content>
           <FlatList 
@@ -45,7 +59,7 @@ class SideMenu extends Component {
             renderItem={ ({ item }) => (
               <ListItem 
                 button 
-                key={item.text} 
+                key={this.makeid()} 
                 onPress={() => this.props.navigation.navigate(item.route)}
                 noBorder >
                 <Icon 
@@ -81,7 +95,10 @@ const styles = StyleSheet.create({
   },
   itemMenu: {
     fontFamily: 'Roboto',
-  }
+  },
+  logo: {
+    marginTop: 5,
+  },
 });
 
 SideMenu.propTypes = {

@@ -52,14 +52,14 @@ class HomeScreen extends Component {
                       this.setState({                         
                         currentItem: ITEMS[0]
                       })
-                      this.props.navigation.navigate("DetailItem", { currentItem: this.state.currentItem })
+                      this.props.navigation.navigate("DetailItem", { currentItem: ITEMS[0] })
                     }}
                     onLongPress={() => { 
                       this.setState({ 
                         isModalVisible: true,
                         currentItem: ITEMS[0]
-                      }) 
-                    }}                      
+                      })
+                    }}
                   >
                     <Image                         
                       source={{ uri: ITEMS[0].uri}} 
@@ -73,8 +73,8 @@ class HomeScreen extends Component {
                     onPress={() => {
                       this.setState({ 
                         currentItem: ITEMS[1]
-                      })
-                      this.props.navigation.navigate("DetailItem", { currentItem: this.state.currentItem })
+                      });
+                      this.props.navigation.navigate("DetailItem", { currentItem: ITEMS[1] })
                     }}
                     onLongPress={() => { 
                       this.setState({ 
@@ -89,7 +89,7 @@ class HomeScreen extends Component {
                   </TouchableOpacity>
                 </Content>
               </Col>
-            </Row>             
+            </Row>
           </Grid>
           <ModalItem 
             hideModal={this._hideModal} 

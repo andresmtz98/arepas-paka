@@ -5,11 +5,15 @@ import { Container, Content, Form, Title, Item, Icon, Left, Input, Button, Text,
 import { CommonStyles } from './../Styles';
 
 class Pedido extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //   };
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      nombre: '',
+      telefono: '',
+      direccion: '',
+      cantidad: 1,
+    };
+  }
 
   render() {
     return (
@@ -34,23 +38,47 @@ class Pedido extends Component {
           <Form>
             <Item style={styles.item}>
               <Icon active name="ios-person" type="Ionicons" />
-              <Input placeholder="Nombre Completo" textContentType="name" />
+              <Input 
+                placeholder="Nombre Completo" 
+                textContentType="name" 
+                value={this.state.nombre}
+                onChangeText={ nombre => { this.setState({ nombre })}}
+              />
             </Item>
             <Item style={styles.item}>
               <Icon active name="phone" type="FontAwesome" />
-              <Input placeholder="Teléfono" textContentType="telephoneNumber" keyboardType="phone-pad" />
+              <Input 
+                placeholder="Teléfono" 
+                textContentType="telephoneNumber" 
+                keyboardType="phone-pad" 
+                value={this.state.telefono}
+                onChangeText={ telefono => { this.setState({ telefono })}}
+              />
             </Item>
             <Item style={styles.item}>
               <Icon active name="address" type="Entypo" />
-              <Input placeholder="Dirección" textContentType="fullStreetAddress" />
+              <Input 
+                placeholder="Dirección" 
+                textContentType="fullStreetAddress" 
+                value={this.state.direccion}
+                onChangeText={ direccion => { this.setState({ direccion })}}
+              />
             </Item>
             <Item style={styles.item}>
               <Icon active name="hash" type="Feather" />
-              <Input placeholder="Cantidad" keyboardType="numeric" />
+              <Input 
+                placeholder="Cantidad" 
+                keyboardType="numeric" 
+                value={this.state.cantidad.toString()}                
+                onChangeText={ cantidad => { this.setState({ cantidad })}}  
+              />
             </Item>           
           </Form>
           <Body style={styles.body}>
-            <Button success onPress={() => alert("En unos 10 minutos su pedido llegará a su casa.")}>
+            <Button success onPress={() => {
+              alert(`En unos 10 minutos su pedido llegará a la dirección ${this.state.direccion}`); 
+              this.props.navigation.goBack();
+            }}>
               <Text style={CommonStyles.baseColor_Font}>Confirmar</Text>
             </Button>
           </Body>
